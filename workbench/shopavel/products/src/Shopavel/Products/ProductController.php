@@ -11,7 +11,7 @@ class ProductController extends \BaseController {
     {
         $products = Product::all();
 
-        return app('themes')->make('product/index');
+        return app('themes')->make('product/index')->with('products', $products);
     }
 
     /**

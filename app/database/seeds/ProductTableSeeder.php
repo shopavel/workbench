@@ -8,7 +8,7 @@ class ProductTableSeeder extends Seeder {
 
         for ($i=0; $i<100; $i++)
         {
-            Product::create(array('title' => 'Product ' . $i));
+            Shopavel\Products\Product::create(array('title' => 'Product ' . $i));
         }
     }
 
