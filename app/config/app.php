@@ -114,7 +114,8 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
-		'Shopavel\Themes\ThemesServiceProvider'
+		'Shopavel\Shopavel\ShopavelServiceProvider',
+		'Shopavel\Themes\ThemesServiceProvider',
 
 	),
 
