@@ -117,6 +117,8 @@ return array(
 		'Shopavel\Shopavel\ShopavelServiceProvider',
 		'Shopavel\Themes\ThemesServiceProvider',
 
+		'Basset\BassetServiceProvider',
+
 	),
 
 	/*
@@ -182,7 +184,9 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
 
-		'Theme'			  => 'Shopavel\Themes\Facades\Theme',
+		'Theme'           => 'Shopavel\Themes\Facades\Theme',
+
+		'Basset'          => 'Basset\Facade',
 
 	),
 

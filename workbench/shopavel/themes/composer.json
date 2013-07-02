@@ -9,7 +9,10 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "illuminate/support": "4.0.x"
+        "illuminate/support": "4.0.x",
+        "jasonlewis/basset": "dev-master",
+        "natxet/CssMin": "dev-master",
+        "linkorb/jsmin-php": "dev-master"
     },
     "autoload": {
         "classmap": [
