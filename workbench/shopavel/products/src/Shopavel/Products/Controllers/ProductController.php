@@ -9,7 +9,7 @@ class ProductController extends \BaseController {
      */
     public function index()
     {
-        //
+        return app('themes')->make('product/index');
     }
 
     /**
