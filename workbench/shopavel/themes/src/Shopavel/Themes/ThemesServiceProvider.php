@@ -34,6 +34,8 @@ class ThemesServiceProvider extends ServiceProvider {
 		{
 			$manager = new ThemeManager($app['config']->get('shopavel::theme'), $app['view']);
 
+			$manager->registerAssets();
+
 			return $manager;
 		});
 	}
