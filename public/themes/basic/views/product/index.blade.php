@@ -7,10 +7,10 @@
     </div>
 
     <div class="container">
-        @foreach ($products as $product)
+        @loop_products()
             <article>
-                <h3>{{ $product->title }}</h3>
+                <h3>ID #{{ $product->id }} {{ $product->title }}</h3>
             </article>
-        @endforeach
+        @end_loop()
     </div>
 @stop

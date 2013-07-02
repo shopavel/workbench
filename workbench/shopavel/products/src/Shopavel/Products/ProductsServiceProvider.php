@@ -20,8 +20,27 @@ class ProductsServiceProvider extends ServiceProvider {
 	{
 		$this->package('shopavel/products');
 
+		$this->registerBladeExtensions();
+
 		include __DIR__.'/../../routes.php';
 	}
+
+	/**
+     * Register the Blade extensions with the compiler.
+     * 
+     * @return void
+     */
+    protected function registerBladeExtensions()
+    {
+        $blade = $this->app['view']->getEngineResolver()->resolve('blade')->getCompiler();
+
+        $blade->extend(function($value, $compiler)
+        {
+            $matcher = $compiler->createMatcher('loop_products');
+            
+            return preg_replace($matcher, '$1<?php foreach(shopavel_loop_products$2 as $product) { ?>', $value);
+        });
+    }
 
 	/**
 	 * Register the service provider.

@@ -19,6 +19,25 @@ class ShopavelServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		$this->package('shopavel/shopavel');
+
+		$this->registerBladeExtensions();
+	}
+
+	/**
+     * Register the Blade extensions with the compiler.
+     * 
+     * @return void
+     */
+	public function registerBladeExtensions()
+	{
+		$blade = $this->app['view']->getEngineResolver()->resolve('blade')->getCompiler();
+
+		$blade->extend(function($value, $compiler)
+        {
+            $matcher = $compiler->createMatcher('end_loop');
+
+            return preg_replace($matcher, '$1<?php } ?>', $value);
+        });
 	}
 
 	/**

@@ -9,9 +9,7 @@ class ProductController extends \BaseController {
      */
     public function index()
     {
-        $products = Product::all();
-
-        return app('themes')->make('product/index')->with('products', $products);
+        return app('themes')->make('product/index');
     }
 
     /**
