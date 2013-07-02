@@ -11,5 +11,5 @@
 
 Route::get('/', function()
 {
-    return View::make('basic.index');
+    return Theme::make('index');
 });

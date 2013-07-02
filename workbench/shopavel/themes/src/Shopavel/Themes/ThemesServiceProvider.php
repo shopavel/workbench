@@ -30,7 +30,12 @@ class ThemesServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		//
+		$this->app['themes'] = $this->app->share(function($app)
+		{
+			$manager = new ThemeManager($app['config']->get('shopavel::theme'), $app['view']);
+
+			return $manager;
+		});
 	}
 
 	/**
