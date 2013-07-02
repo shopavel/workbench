@@ -19,7 +19,28 @@ class CategoriesServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		$this->package('shopavel/categories');
+
+		$this->registerBladeExtensions();
+
+		include __DIR__.'/../../routes.php';
 	}
+
+	/**
+     * Register the Blade extensions with the compiler.
+     * 
+     * @return void
+     */
+    protected function registerBladeExtensions()
+    {
+        $blade = $this->app['view']->getEngineResolver()->resolve('blade')->getCompiler();
+
+        $blade->extend(function($value, $compiler)
+        {
+            $matcher = $compiler->createMatcher('loop_categories');
+            
+            return preg_replace($matcher, '$1<?php foreach(shopavel_loop_categories$2 as $category) { ?>', $value);
+        });
+    }
 
 	/**
 	 * Register the service provider.

@@ -17,7 +17,8 @@
         ],
         "psr-0": {
             "Shopavel\\Categories": "src/"
-        }
+        },
+        "files": ["src/helpers.php"]
     },
     "minimum-stability": "dev"
 }

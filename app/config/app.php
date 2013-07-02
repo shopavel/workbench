@@ -117,6 +117,7 @@ return array(
 		'Shopavel\Shopavel\ShopavelServiceProvider',
 		'Shopavel\Themes\ThemesServiceProvider',
 		'Shopavel\Products\ProductsServiceProvider',
+		'Shopavel\Categories\CategoriesServiceProvider',
 
 		'Basset\BassetServiceProvider',
 

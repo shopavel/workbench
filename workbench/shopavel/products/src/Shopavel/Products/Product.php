@@ -9,4 +9,9 @@ class Product extends \Eloquent {
      */
     protected $table = 'products';
 
+    public function categories()
+    {
+        return $this->belongsToMany('\Shopavel\Categories\Category');
+    }
+
 }
