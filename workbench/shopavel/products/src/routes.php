@@ -9,4 +9,4 @@
 | 
 */
 
-Route::resource('product', '\Shopavel\Products\Controllers\ProductController');
+Route::resource('product', '\Shopavel\Products\ProductController');

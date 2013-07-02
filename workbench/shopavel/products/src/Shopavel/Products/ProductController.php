@@ -1,4 +1,4 @@
-<?php namespace Shopavel\Products\Controllers;
+<?php namespace Shopavel\Products;
 
 class ProductController extends \BaseController {
 
@@ -9,6 +9,8 @@ class ProductController extends \BaseController {
      */
     public function index()
     {
+        $products = Product::all();
+
         return app('themes')->make('product/index');
     }
 
