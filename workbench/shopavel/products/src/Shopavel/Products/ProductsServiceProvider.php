@@ -19,6 +19,8 @@ class ProductsServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		$this->package('shopavel/products');
+
+		include __DIR__.'/../../routes.php';
 	}
 
 	/**
