@@ -19,6 +19,8 @@ class ThemesServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		$this->package('shopavel/themes');
+
+		include __DIR__.'/../../routes.php';
 	}
 
 	/**

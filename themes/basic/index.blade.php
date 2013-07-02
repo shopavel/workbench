@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('basic.layout')
 
 @section('content')
     <div class="hero-unit">
