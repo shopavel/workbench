@@ -2,4 +2,4 @@
 
 Currently in early development stages, everything is subject to change.
 
-See [http://gelatin.localhost.com/shopavel](http://gelatin.localhost.com/shopavel) for documentation.
+See [http://www.gelatindesign.co.uk/shopavel](http://www.gelatindesign.co.uk/shopavel) for documentation.
