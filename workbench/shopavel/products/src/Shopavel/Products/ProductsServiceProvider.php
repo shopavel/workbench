@@ -49,7 +49,12 @@ class ProductsServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		//
+		$this->app['products'] = $this->app->share(function($app)
+        {
+            $manager = new ProductManager;
+
+            return $manager;
+        });
 	}
 
 	/**

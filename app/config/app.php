@@ -187,6 +187,7 @@ return array(
 		'View'            => 'Illuminate\Support\Facades\View',
 
 		'Theme'           => 'Shopavel\Themes\Facades\Theme',
+		'Product'         => 'Shopavel\Products\Facades\Product',
 
 		'Basset'          => 'Basset\Facade',
 

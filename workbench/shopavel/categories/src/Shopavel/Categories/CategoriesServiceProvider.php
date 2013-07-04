@@ -38,7 +38,7 @@ class CategoriesServiceProvider extends ServiceProvider {
         {
             $matcher = $compiler->createMatcher('loop_categories');
             
-            return preg_replace($matcher, '$1<?php foreach(shopavel_loop_categories$2 as $category) { ?>', $value);
+            return preg_replace($matcher, '$1<?php foreach(shopavel_loop_categories$2 as $category) { \Product::setLoopProducts($category->products); ?>', $value);
         });
     }
 
