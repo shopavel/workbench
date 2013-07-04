@@ -3,7 +3,21 @@
 use DB;
 use Illuminate\Database\Eloquent\Builder;
 
-abstract class LoopHandler {
+class LoopHandler {
+
+    /**
+     * Name of the loop handler
+     * 
+     * @var string
+     */
+    protected $name;
+
+    /**
+     * Eloquent model this handler returns.
+     * 
+     * @var \Illuminate\Database\Eloquent\Model
+     */
+    protected $model;
 
     /**
      * Query to be modified by option handlers.
@@ -24,8 +38,28 @@ abstract class LoopHandler {
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($name = null, $model = null)
     {
+        if ($name !== null)
+        {
+            $this->name = $name;
+        }
+
+        if ($this->name === null)
+        {
+            throw new ErrorException("Name not set on loop handler");
+        }
+
+        if ($model !== null)
+        {
+            $this->model = $model;
+        }
+
+        if ($this->model === null)
+        {
+            throw new ErrorException("Model not set on loop handler");
+        }
+
         $this->reset();
 
         $this->addOptionHandler('order', function(Builder $query, $value)
@@ -53,13 +87,33 @@ abstract class LoopHandler {
     }
 
     /**
-     * Reset the query, should be overloaded by child classes.
+     * Register the Blade extensions with the compiler.
+     * 
+     * @return void
+     */
+    protected function registerBladeExtensions()
+    {
+        $me = $this;
+
+        $blade = app('view')->getEngineResolver()->resolve('blade')->getCompiler();
+
+        $blade->extend(function($value, $compiler) use ($me)
+        {
+            $matcher = $compiler->createMatcher('loop_' . $me->name);
+            
+            return preg_replace($matcher, '$1<?php foreach(shopavel_loop$2 as $key => $'.strtolower($me->model).') { ?>', $value);
+        });
+    }
+
+    /**
+     * Reset the query.
      * 
      * @return void
      */
     public function reset()
     {
-        //
+        $model = $this->model;
+        $this->query = $model::query();
     }
 
     /**

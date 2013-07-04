@@ -28,7 +28,12 @@ class LoopsServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		//
+		$this->app['loops'] = $this->app->share(function($app)
+        {
+            $manager = new LoopManager;
+
+            return $manager;
+        });
 	}
 
 	/**

@@ -116,6 +116,7 @@ return array(
 
 		'Shopavel\Shopavel\ShopavelServiceProvider',
 		'Shopavel\Themes\ThemesServiceProvider',
+		'Shopavel\Loops\LoopsServiceProvider',
 		'Shopavel\Products\ProductsServiceProvider',
 		'Shopavel\Categories\CategoriesServiceProvider',
 
@@ -187,6 +188,7 @@ return array(
 		'View'            => 'Illuminate\Support\Facades\View',
 
 		'Theme'           => 'Shopavel\Themes\Facades\Theme',
+		'Loop'            => 'Shopavel\Loops\Facades\Loop',
 		'Product'         => 'Shopavel\Products\Facades\Product',
 
 		'Basset'          => 'Basset\Facade',

@@ -5,6 +5,10 @@ use Shopavel\Loops\LoopHandler;
 
 class ProductLoopHandler extends LoopHandler {
 
+    protected $name = 'products';
+    
+    protected $model = 'Product';
+
     public function __construct()
     {
         parent::__construct();

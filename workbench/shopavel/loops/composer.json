@@ -14,7 +14,8 @@
     "autoload": {
         "psr-0": {
             "Shopavel\\Loops": "src/"
-        }
+        },
+        "files": ["src/helpers.php"]
     },
     "minimum-stability": "dev"
 }
