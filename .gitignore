@@ -5,3 +5,8 @@ composer.lock
 .DS_Store
 
 /app/config/local/database.php
+
+/public/builds
+!/public/builds/.gitkeep
+
+/node_modules
