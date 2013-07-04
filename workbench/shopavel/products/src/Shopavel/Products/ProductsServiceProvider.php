@@ -1,6 +1,7 @@
 <?php namespace Shopavel\Products;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Eloquent\Builder;
 
 class ProductsServiceProvider extends ServiceProvider {
 
@@ -37,7 +38,20 @@ class ProductsServiceProvider extends ServiceProvider {
             return $product;
         });
 
-        $loop = \Loop::create('products', '\Shopavel\Products\Product');
+        $loop = app('loops')->create('products', '\Shopavel\Products\Product');
+        $loop->addOptionHandler('order', function(Builder $query, $value)
+        {
+            switch ($value)
+            {
+                case 'latest':
+                case 'newest':
+                    $query->orderBy('created_at', 'desc');
+                    break;
+
+                case 'bestselling':
+                    break;
+            }
+        });
 
 		$this->app['loops.products'] = $this->app->share(function($app) use ($loop)
         {
