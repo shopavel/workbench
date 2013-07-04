@@ -51,9 +51,9 @@ class ProductsServiceProvider extends ServiceProvider {
 	{
 		$this->app['products'] = $this->app->share(function($app)
         {
-            $manager = new ProductManager;
+            $loop = new ProductLoopHandler;
 
-            return $manager;
+            return $loop;
         });
 	}
 
