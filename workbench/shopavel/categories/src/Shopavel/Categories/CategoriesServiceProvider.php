@@ -20,27 +20,8 @@ class CategoriesServiceProvider extends ServiceProvider {
 	{
 		$this->package('shopavel/categories');
 
-		$this->registerBladeExtensions();
-
 		include __DIR__.'/../../routes.php';
 	}
-
-	/**
-     * Register the Blade extensions with the compiler.
-     * 
-     * @return void
-     */
-    protected function registerBladeExtensions()
-    {
-        $blade = $this->app['view']->getEngineResolver()->resolve('blade')->getCompiler();
-
-        $blade->extend(function($value, $compiler)
-        {
-            $matcher = $compiler->createMatcher('loop_categories');
-            
-            return preg_replace($matcher, '$1<?php foreach(shopavel_loop_categories$2 as $category) { \Product::setLoopProducts($category->products); ?>', $value);
-        });
-    }
 
 	/**
 	 * Register the service provider.
@@ -49,7 +30,12 @@ class CategoriesServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		//
+		$loop = app('loops')->create('categories', '\Shopavel\Categories\Category');
+
+        $this->app['loops.categories'] = $this->app->share(function($app) use ($loop)
+        {
+            return $loop;
+        });
 	}
 
 	/**
@@ -59,7 +45,7 @@ class CategoriesServiceProvider extends ServiceProvider {
 	 */
 	public function provides()
 	{
-		return array();
+		return array('loops.categories');
 	}
 
 }

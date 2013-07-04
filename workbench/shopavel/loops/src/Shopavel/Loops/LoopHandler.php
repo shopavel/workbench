@@ -101,7 +101,9 @@ class LoopHandler {
 
             $object = strtolower(class_basename($me->model));
             
-            return preg_replace($matcher, '$1<?php foreach(shopavel_loop("'.$me->name.'", $2) as $key => $'.$object.') { ?>', $value);
+            $value = preg_replace($matcher, '$1<?php foreach(shopavel_loop("'.$me->name.'", $2) as $key => $'.$object.') { ?>', $value);
+            $value = str_replace(', ())', ')', $value);
+            return $value;
         });
     }
 
@@ -184,6 +186,11 @@ class LoopHandler {
      */
     public function getLoopCollection()
     {
+        if ($this->query == null)
+        {
+            $this->reset();
+        }
+        
         return $this->query->get();
     }
 

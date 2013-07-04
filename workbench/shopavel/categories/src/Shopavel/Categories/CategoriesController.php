@@ -40,7 +40,9 @@ class CategoriesController extends \BaseController {
      */
     public function show($id)
     {
-        //
+        $category = Category::find($id);
+        app('loops.products')->setQuery($category->products()->getQuery()->select(app('products')->getTable().'.*'));
+        return app('themes')->make('category/show')->with('category', $category);
     }
 
     /**

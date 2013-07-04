@@ -19,7 +19,9 @@
                     <a class="brand" href="/">Shopavel</a>
                     <div class="nav-collapse collapse">
                         <ul class="nav">
-                            <li><a href="asdf">asdf</a></li>
+                            @loop_categories()
+                                <li><a href="{{ URL::route('category.show', ['category' => $category->id]) }}">{{ $category->title }}</a></li>
+                            @end_loop()
                         </ul>
                     </div>
                 </div>
