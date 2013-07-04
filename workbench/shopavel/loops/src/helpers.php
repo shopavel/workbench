@@ -8,12 +8,12 @@ if ( ! function_exists('shopavel_loop'))
 
         if ($options !== null)
         {
-            $looper::setOptionValues($options);
+            $looper->setOptionValues($options);
         }
 
-        $collection = $looper::getLoopCollection();
+        $collection = $looper->getLoopCollection();
 
-        $looper::reset();
+        $looper->reset();
 
         return $collection;
     }

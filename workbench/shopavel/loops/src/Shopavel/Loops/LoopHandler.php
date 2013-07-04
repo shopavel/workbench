@@ -44,23 +44,21 @@ class LoopHandler {
         {
             $this->name = $name;
         }
-
-        if ($this->name === null)
+        elseif ($this->name === null)
         {
             throw new ErrorException("Name not set on loop handler");
         }
-
+        
         if ($model !== null)
         {
             $this->model = $model;
         }
-
-        if ($this->model === null)
+        elseif ($this->model === null)
         {
             throw new ErrorException("Model not set on loop handler");
         }
 
-        $this->reset();
+        $this->registerBladeExtensions();
 
         $this->addOptionHandler('order', function(Builder $query, $value)
         {
@@ -100,8 +98,10 @@ class LoopHandler {
         $blade->extend(function($value, $compiler) use ($me)
         {
             $matcher = $compiler->createMatcher('loop_' . $me->name);
+
+            $object = strtolower(class_basename($me->model));
             
-            return preg_replace($matcher, '$1<?php foreach(shopavel_loop$2 as $key => $'.strtolower($me->model).') { ?>', $value);
+            return preg_replace($matcher, '$1<?php foreach(shopavel_loop("'.$me->name.'", $2) as $key => $'.$object.') { ?>', $value);
         });
     }
 
@@ -154,6 +154,11 @@ class LoopHandler {
      */
     public function setOptionValues($options)
     {
+        if ($this->query == null)
+        {
+            $this->reset();
+        }
+        
         foreach ($options as $key => $value)
         {
             $this->applyOptionHandler($this->option_handlers[$key], $value);

@@ -8,6 +8,8 @@ class LoopManager {
     {
         $handler = new LoopHandler($key, $model);
         $this->addHandler($key, $handler);
+
+        return $handler;
     }
 
     public function extend($key, $option, $callback)
