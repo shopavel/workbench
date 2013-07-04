@@ -7,10 +7,14 @@
     </div>
 
     <div class="row product-list">
-        @loop_products(['order' => 'latest', 'take' => 4])
+        @loop_products(['order' => 'latest', 'take' => 8])
             <div class="span3">
                 @include('basic.views.product.show-list')
             </div>
+
+            @if ($key == 3)
+                </div><div class="row product-list">
+            @endif
         @end_loop()
     </div>
 @stop

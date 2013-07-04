@@ -38,7 +38,7 @@ class ProductsServiceProvider extends ServiceProvider {
         {
             $matcher = $compiler->createMatcher('loop_products');
             
-            return preg_replace($matcher, '$1<?php foreach(shopavel_loop_products$2 as $product) { ?>', $value);
+            return preg_replace($matcher, '$1<?php foreach(shopavel_loop_products$2 as $key => $product) { ?>', $value);
         });
     }
 

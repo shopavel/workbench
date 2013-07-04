@@ -8,6 +8,11 @@ if ( ! function_exists('shopavel_loop_products'))
         {
             Product::setOptionValues($options);
         }
-        return Product::getObjects();
+
+        $collection = Product::getLoopCollection();
+
+        Product::reset();
+
+        return $collection;
     }
 }

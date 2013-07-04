@@ -2,6 +2,11 @@
 
 class OptionHandler {
 
+    /**
+     * List of callbacks to apply to the query
+     * 
+     * @var array
+     */
     protected $callbacks = [];
 
     public function __construct($callback)
@@ -19,11 +24,11 @@ class OptionHandler {
         $this->callbacks[] = $callback;
     }
 
-    public function call($objects, $value)
+    public function call($query, $value)
     {
         foreach ($this->callbacks as $callback)
         {
-            $callback($objects, $value);
+            $callback($query, $value);
         }
     }
 
