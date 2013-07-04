@@ -1,7 +1,7 @@
 <?php namespace Shopavel\Products;
 
 use Illuminate\Database\Eloquent\Builder;
-use Shopavel\Support\Loop\LoopHandler;
+use Shopavel\Loops\LoopHandler;
 
 class ProductLoopHandler extends LoopHandler {
 

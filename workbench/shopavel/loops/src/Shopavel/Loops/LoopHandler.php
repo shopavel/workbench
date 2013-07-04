@@ -1,4 +1,4 @@
-<?php namespace Shopavel\Support\Loop;
+<?php namespace Shopavel\Loops;
 
 use DB;
 use Illuminate\Database\Eloquent\Builder;

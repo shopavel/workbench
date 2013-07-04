@@ -1,5 +1,5 @@
 {
-    "name": "shopavel/support",
+    "name": "shopavel/loops",
     "description": "",
     "authors": [
         {
@@ -12,11 +12,8 @@
         "illuminate/support": "4.0.x"
     },
     "autoload": {
-        "classmap": [
-            "src/migrations"
-        ],
         "psr-0": {
-            "Shopavel\\Support": "src/"
+            "Shopavel\\Loops": "src/"
         }
     },
     "minimum-stability": "dev"

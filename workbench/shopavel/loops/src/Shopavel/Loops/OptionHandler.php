@@ -1,4 +1,4 @@
-<?php namespace Shopavel\Support\Loop;
+<?php namespace Shopavel\Loops;
 
 class OptionHandler {
 

@@ -1,8 +1,8 @@
-<?php namespace Shopavel\Support;
+<?php namespace Shopavel\Loops;
 
 use Illuminate\Support\ServiceProvider;
 
-class SupportServiceProvider extends ServiceProvider {
+class LoopsServiceProvider extends ServiceProvider {
 
 	/**
 	 * Indicates if loading of the provider is deferred.
@@ -18,7 +18,7 @@ class SupportServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('shopavel/support');
+		$this->package('shopavel/loops');
 	}
 
 	/**
