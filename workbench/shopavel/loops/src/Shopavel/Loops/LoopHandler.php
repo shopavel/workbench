@@ -44,8 +44,7 @@ class LoopHandler {
         {
             $this->name = $name;
         }
-
-        if ($this->name === null)
+        elseif ($this->name === null)
         {
             throw new ErrorException("Name not set on loop handler");
         }
@@ -54,11 +53,12 @@ class LoopHandler {
         {
             $this->model = $model;
         }
-
-        if ($this->model === null)
+        elseif ($this->model === null)
         {
             throw new ErrorException("Model not set on loop handler");
         }
+
+        $this->registerBladeExtensions();
 
         $this->reset();
 
@@ -112,7 +112,7 @@ class LoopHandler {
      */
     public function reset()
     {
-        $model = $this->model;
+        $model = new $this->model;
         $this->query = $model::query();
     }
 

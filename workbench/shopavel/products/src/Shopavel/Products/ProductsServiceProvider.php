@@ -37,10 +37,24 @@ class ProductsServiceProvider extends ServiceProvider {
             return $product;
         });
 
-		$this->app['loops.product'] = $this->app->share(function($app)
-        {
-            $loop = new ProductLoopHandler;
+        $loop = \Loop::create('products', '\Shopavel\Products\Product');
 
+        $loop->addOptionHandler('order', function(Builder $query, $value)
+        {
+            switch ($value)
+            {
+                case 'latest':
+                case 'newest':
+                    $query->orderBy('created_at', 'desc');
+                    break;
+
+                case 'bestselling':
+                    break;
+            }
+        });
+
+		$this->app['loops.product'] = $this->app->share(function($app) use ($loop)
+        {
             return $loop;
         });
 	}
@@ -52,7 +66,7 @@ class ProductsServiceProvider extends ServiceProvider {
 	 */
 	public function provides()
 	{
-		return array();
+		return array('products', 'loops.product');
 	}
 
 }
