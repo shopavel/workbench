@@ -38,7 +38,7 @@ class ProductsServiceProvider extends ServiceProvider {
             return $product;
         });
 
-        $loop = app('loops')->create('products', '\Shopavel\Products\Product');
+        $loop = $this->app['loops.manager']->create('products', '\Shopavel\Products\Product');
         $loop->addOptionHandler('order', function(Builder $query, $value)
         {
             switch ($value)
