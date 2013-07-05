@@ -1,6 +1,7 @@
 <?php namespace Shopavel\Loops;
 
-use DB;
+// use DB;
+use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\Builder;
 
 class LoopHandler {
@@ -38,28 +39,24 @@ class LoopHandler {
      *
      * @return void
      */
-    public function __construct($name = null, $model = null)
+    public function __construct(Container $app, $name, $model)
     {
-        if ($name !== null)
-        {
-            $this->name = $name;
-        }
-        elseif ($this->name === null)
-        {
-            throw new ErrorException("Name not set on loop handler");
-        }
-        
-        if ($model !== null)
-        {
-            $this->model = $model;
-        }
-        elseif ($this->model === null)
-        {
-            throw new ErrorException("Model not set on loop handler");
-        }
+        $this->app = $app;
+        $this->blade = $app['view']->getEngineResolver()->resolve('blade')->getCompiler();
+        $this->name = $name;
+        $this->model = $model;
 
         $this->registerBladeExtensions();
+        $this->addDefaultOptionHandlers();
+    }
 
+    /**
+     * Add the default option handlers for the loop
+     *
+     * @return void
+     */
+    protected function addDefaultOptionHandlers()
+    {
         $this->addOptionHandler('order', function(Builder $query, $value)
         {
             switch ($value)
@@ -69,7 +66,7 @@ class LoopHandler {
                     break;
 
                 case 'random':
-                    $query->orderBy(DB::raw('RAND()'));
+                    $query->orderBy($this->app['db']->raw('RAND()'));
                     break;
 
                 case 'created':
@@ -93,9 +90,7 @@ class LoopHandler {
     {
         $me = $this;
 
-        $blade = app('view')->getEngineResolver()->resolve('blade')->getCompiler();
-
-        $blade->extend(function($value, $compiler) use ($me)
+        $this->blade->extend(function($value, $compiler) use ($me)
         {
             $matcher = $compiler->createMatcher('loop_' . $me->name);
 
@@ -129,6 +124,11 @@ class LoopHandler {
         $this->query = $query;
     }
 
+    public function getQuery()
+    {
+        return $this->query;
+    }
+
     /**
      * Add an option handler to the loop.
      * 
@@ -136,7 +136,7 @@ class LoopHandler {
      * @param  \Closure  $callback
      * @return void
      */
-    public function addOptionHandler($key, $callback)
+    public function addOptionHandler($key, \Closure $callback)
     {
         if (! isset($this->option_handlers[$key]))
         {
@@ -146,6 +146,11 @@ class LoopHandler {
         {
             $this->option_handlers[$key]->extend($callback);
         }
+    }
+
+    public function getOptionHandlers()
+    {
+        return $this->option_handlers;
     }
 
     /**

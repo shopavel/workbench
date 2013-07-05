@@ -9,6 +9,6 @@ class Loop extends Facade {
      *
      * @return  string
      */
-    protected static function getFacadeAccessor() { return 'loops'; }
+    protected static function getFacadeAccessor() { return 'loops.manager'; }
 
 }
