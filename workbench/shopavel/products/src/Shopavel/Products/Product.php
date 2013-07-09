@@ -14,4 +14,9 @@ class Product extends \Eloquent {
         return $this->belongsToMany('\Shopavel\Categories\Category');
     }
 
+    public function url()
+    {
+        return \URL::route('product.show', ['product' => $this->id]);
+    }
+
 }
