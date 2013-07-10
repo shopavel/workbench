@@ -1,6 +1,8 @@
 <?php namespace Shopavel\Products;
 
-class ProductController extends \BaseController {
+use Shopavel\Shopavel\ShopavelController;
+
+class ProductController extends ShopavelController {
 
     /**
      * Display a listing of the resource.
@@ -9,7 +11,7 @@ class ProductController extends \BaseController {
      */
     public function index()
     {
-        return app('themes')->make('product/index');
+        return $this->app['themes']->make('product/index');
     }
 
     /**
@@ -40,7 +42,9 @@ class ProductController extends \BaseController {
      */
     public function show($id)
     {
-        //
+        $product = Product::findOrFail($id);
+
+        return $this->app['themes']->make('product/show');
     }
 
     /**
