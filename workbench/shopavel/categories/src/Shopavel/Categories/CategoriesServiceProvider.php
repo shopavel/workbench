@@ -30,6 +30,11 @@ class CategoriesServiceProvider extends ServiceProvider {
      */
     public function register()
     {
+        $this->app['categories'] = $this->app->share(function($app)
+        {
+            return new Category;
+        });
+
         $loop = $this->app['loops.manager']->create('categories', '\Shopavel\Categories\Category');
 
         $this->app['loops.categories'] = $this->app->share(function($app) use ($loop)

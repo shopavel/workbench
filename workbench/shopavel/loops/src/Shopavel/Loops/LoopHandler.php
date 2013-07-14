@@ -46,8 +46,8 @@ class LoopHandler {
         $this->name = $name;
         $this->model = $model;
 
-        $this->registerBladeExtensions();
         $this->addDefaultOptionHandlers();
+        $this->registerBladeExtensions();
     }
 
     /**
@@ -95,10 +95,17 @@ class LoopHandler {
             $matcher = $compiler->createMatcher('loop_' . $me->name);
 
             $object = strtolower(class_basename($me->model));
-            
-            $value = preg_replace($matcher, '$1<?php foreach(shopavel_loop("'.$me->name.'", $2) as $key => $'.$object.') { ?>', $value);
+
+            $value = preg_replace($matcher, '$1<?php $loop = shopavel_loop("'.$me->name.'", $2); $items = $loop->getCollection(); foreach($items as $key => $'.$object.') { $loop->setIndex($key); ?>', $value);
             $value = str_replace(', ())', ')', $value);
             return $value;
+        });
+
+        $this->blade->extend(function($value, $compiler)
+        {
+            $matcher = $compiler->createMatcher('end_loop');
+
+            return preg_replace($matcher, '$1<?php } $loop->reset(); ?>', $value);
         });
     }
 
@@ -189,14 +196,31 @@ class LoopHandler {
      * 
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getLoopCollection()
+    public function getCollection()
     {
         if ($this->query == null)
         {
             $this->reset();
         }
         
-        return $this->query->get();
+        $this->collection = $this->query->get();
+
+        return $this->collection;
+    }
+
+    public function setIndex($index)
+    {
+        $this->index = $index;
+    }
+
+    public function isFirst()
+    {
+        return $this->index == 0;
+    }
+
+    public function isLast()
+    {
+        return $this->index == count($this->collection) - 1;
     }
 
 }

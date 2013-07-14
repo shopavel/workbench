@@ -1,6 +1,8 @@
 <?php namespace Shopavel\Categories;
 
-class CategoriesController extends \BaseController {
+use Shopavel\Shopavel\ShopavelController;
+
+class CategoriesController extends ShopavelController {
 
     /**
      * Display a listing of the resource.
@@ -9,7 +11,7 @@ class CategoriesController extends \BaseController {
      */
     public function index()
     {
-        return app('themes')->make('category/index');
+        return $this->app['themes']->make('category/index');
     }
 
     /**

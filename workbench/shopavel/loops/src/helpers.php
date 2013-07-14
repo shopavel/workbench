@@ -11,10 +11,6 @@ if ( ! function_exists('shopavel_loop'))
             $looper->setOptionValues($options);
         }
 
-        $collection = $looper->getLoopCollection();
-
-        $looper->reset();
-
-        return $collection;
+        return $looper;
     }
 }

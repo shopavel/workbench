@@ -1,7 +1,7 @@
 @extends('basic.views.layout')
 
 @section('content')
-    <div class="hero-unit">
+    <div class="page-header">
         <h1>{{ $category->title }}</h1>
         <p>Contains {{ $category->products()->count() }} products</p>
     </div>

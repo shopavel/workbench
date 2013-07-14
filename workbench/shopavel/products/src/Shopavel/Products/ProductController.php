@@ -43,8 +43,9 @@ class ProductController extends ShopavelController {
     public function show($id)
     {
         $product = Product::findOrFail($id);
+        $this->app['loops.categories']->setQuery($product->categories()->getQuery()->select($this->app['categories']->getTable().'.*'));
 
-        return $this->app['themes']->make('product/show');
+        return $this->app['themes']->make('product/show')->with('product', $product);
     }
 
     /**

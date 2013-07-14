@@ -19,4 +19,15 @@ class Product extends \Eloquent {
         return \URL::route('product.show', ['product' => $this->id]);
     }
 
+    public function images()
+    {
+        // temp
+        return [
+            (object) ['src' => 'http://placebear.com/600/400'],
+            (object) ['src' => 'http://placebear.com/g/600/400'],
+            (object) ['src' => 'http://placekitten.com/600/400'],
+            (object) ['src' => 'http://placekitten.com/g/600/400'],
+        ];
+    }
+
 }
