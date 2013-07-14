@@ -21,6 +21,7 @@
         <div class="row">
             <div class="span4">
                 <ul class="thumbnails">
+                    {{-- make this a loop --}}
                     @foreach ($product->images() as $key => $image)
                         <li class="span2">
                             <a class="thumbnail" href="#">
